@@ -27,8 +27,26 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     @IBAction func loginButtonTapped(_ sender: UIButton) {
+        if let email = emailTextField.text {
+            if let pass = passwordTextField.text {
+                if pass == "Abc00011" && email == "abc@xyz.test" {
+                    performSegue(withIdentifier: "animationSegue", sender: self)
+                }else{
+                    showNotification()
+                }
+            }else{
+                showNotification()
+            }
+        }else{
+            showNotification()
+        }
         
-        performSegue(withIdentifier: "animationSegue", sender: self)
+    }
+    
+    func showNotification() {
+        let alert = UIAlertController(title: "Wrong Email or Password", message: "Please enter valid password", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
